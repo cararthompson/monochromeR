@@ -39,8 +39,8 @@ green value, blue value), with all values between 0 and 255."))
 #'
 #' @param color_rgba A vector of length 4: c(red value, green value, blue value, alpha).
 #' All colour values must be between 0 and 255. Alpha must be between 0 and 1.
-#' @param background_color The background color must either be a recognised color name (e.g. \"white\"),
-#' a hex color code (e.g. \"#ffffff\") or vector of length 3 (red value, green value, blue value),
+#' @param background_color The background color must either be a recognised color name (e.g. "white"),
+#' a hex color code (e.g. "#ffffff") or vector of length 3 (red value, green value, blue value),
 #' with all values between 0 and 255. The default value is white ("#ffffff").
 #'
 #' @return A matrix of red, green and blue values

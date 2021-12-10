@@ -20,8 +20,6 @@ p <- ggplot(aes(x = 1, y = coord),
   theme_void() +
   theme_transparent()
 
-
-
 sticker(p, package="monochromeR", p_y = 1.11, p_size=18.5, s_x=1, s_y=1, s_width=1.9, s_height=2.2,
         h_color = pal[2], p_color = pal[1], p_family = "lato",
         white_around_sticker = T,

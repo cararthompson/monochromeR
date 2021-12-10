@@ -14,17 +14,17 @@ generate_palette(
 )
 }
 \arguments{
-\item{color}{The anchor color for the palette, which must be either be a recognised color name (e.g. \"white\"),
-a hex color code (e.g. \"#ffffff\") or vector of length 3 (red value, green value, blue value, e.g. c(15, 75, 99)),
+\item{color}{The anchor color for the palette, which must be either be a recognised color name (e.g. "white"),
+a hex color code (e.g. "#ffffff") or vector of length 3 (red value, green value, blue value, e.g. c(15, 75, 99)),
 with all values between 0 and 255. The default value is white ("#ffffff").}
 
-\item{modification}{One of the following: \"go_darker\", \"go_lighter\", \"go_both_ways\", or \"blend\".
-If a \code{blend_color} is supplied, \code{modification} is set to \"blend\"}
+\item{modification}{One of the following: "go_darker", "go_lighter", "go_both_ways", or "blend".
+If a \code{blend_color} is supplied, \code{modification} is automatically set to "blend".}
 
 \item{n_colors}{Number of colors (levels) required in the palette}
 
-\item{blend_color}{Optional. Can be either be a recognised color name (e.g. \"white\"),
-a hex color code (e.g. \"#ffffff\") or vector of length 3 (red value, green value, blue value, e.g. c(15, 75, 99)),
+\item{blend_color}{Optional. Can be either be a recognised color name (e.g. "white"),
+a hex color code (e.g. "#ffffff") or vector of length 3 (red value, green value, blue value, e.g. c(15, 75, 99)),
 with all values between 0 and 255. The default value is white ("#ffffff").}
 
 \item{view_palette}{Logical. \code{view_palette = TRUE} displays the palette in the plot window.}
@@ -36,21 +36,15 @@ not the hex color codes are shown on the palette displayed in the plot window.}
 A vector of hex color codes making up the generated palette
 }
 \description{
-This function also allows users generate a monochrome color palette
+This function allows users generate a monochrome color palette
 with any number of levels, starting from any color. The \code{modification}
 parameter can be set to make the palette go darker, lighter, or both
-ways from the original color.
-}
-\details{
-The function also allows users to create a pelette that gpes from
-one color to another, by providing a \code{blend_color}.
+ways from the starting color. The function also allows users to create
+a pelette that goes from one color to another, by providing a \code{blend_color}.
 }
 \examples{
-generate_palette("red", modification = "go_lighter",
-n_colors = 5, view_palette = TRUE, view_labels = TRUE)
-generate_palette(c(15, 75, 99), modification = "go_both_ways",
-n_colors = 12, view_palette = TRUE, view_labels = FALSE)
-generate_palette("red", blend_color = "blue",
-n_colors = 6, view_palette = TRUE)
+generate_palette("red", modification = "go_lighter", n_colors = 5, view_palette = TRUE, view_labels = TRUE)
+generate_palette(c(15, 75, 99), modification = "go_both_ways", n_colors = 12, view_palette = TRUE, view_labels = FALSE)
+generate_palette("red", blend_color = "blue", n_colors = 6, view_palette = TRUE)
 
 }
