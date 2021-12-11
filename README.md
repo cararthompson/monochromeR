@@ -5,15 +5,13 @@ monochromeR: an easy way to create monochrome colour palettes
 
 ## What does the package do?
 
-Its main function, `generate_palette()`, generates a monochrome palette
-from a starting colour for a specified number of colours. Users can
-decide whether to go darker, lighter, or both ways from that colour. The
-starting colour can be provided as a vector of rgb values
-(e.g. `c(15, 75, 99)`), a hex colour code (e.g. `#0F4B63`) or a
-recognised colour name (e.g. `"purple"`). To make the examples below
-easy to read, I will use colour names. The function also allows users to
-view the palette in the plot window if they want to, with or without
-labels.
+This package generates a monochrome palette from a starting colour for a
+specified number of colours. Users can decide whether to go darker,
+lighter, or both ways from that starting colour, which can be provided
+as a vector of rgb values (e.g. `c(15, 75, 99)`), a hex colour code
+(e.g. `#0F4B63`) or a recognised colour name (e.g. `"purple"`). The
+package can also display the generated palette in the plot window, with
+or without hex colour code labels.
 
 ## How can I use it?
 
@@ -22,7 +20,8 @@ To install it, use
 
 ## Can we see some examples?
 
-Sure! Here goes.
+Sure! Here goes. To make the examples easy to read, I will use
+recognised colour names rather than hex codes or rgb values.
 
 ``` r
 library(monochromeR)
@@ -161,7 +160,7 @@ to their flipper and bill lengths. All things in perfect proportion! ",
 
 ## Finally, here are some resources I found helpful in making this package
 
--   **For the machanist of how to make a package**: [Your first R
+-   **For the mechanics of how to make a package**: [Your first R
     package in 1
     hour](https://www.pipinghotdata.com/posts/2020-10-25-your-first-r-package-in-1-hour/),
     a tutorial by Shannon Pileggi
