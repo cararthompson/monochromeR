@@ -25,23 +25,25 @@ need to have installed the `remotes` package. To do that, use
 Sure! Here goes. To make the examples easy to read, I will use
 recognised colour names rather than hex codes or rgb values.
 
-### Generate palettes
+### Generate monochrome palettes with `generate_palette()`
 
 ``` r
 library(monochromeR)
 
-generate_palette("purple", modification = "go_lighter", n_colours = 5, view_palette = T)
+generate_palette("purple", modification = "go_lighter", 
+                 n_colours = 5, view_palette = T)
 ```
 
 ![](README_files/figure-gfm/unnamed-chunk-1-1.png)<!-- -->
 
     ## [1] "#A020F0" "#B34CF3" "#C679F6" "#D9A5F9" "#ECD2FC"
 
-The functions allow for British/NZ spelling and US spelling of
+The functions allow for British spelling and US spelling of
 colour/color.
 
 ``` r
-generate_palette("purple", modification = "go_darker", n_colors = 5, view_palette = T, view_labels = F)
+generate_palette("purple", modification = "go_darker", 
+                 n_colors = 5, view_palette = T, view_labels = F)
 ```
 
 ![](README_files/figure-gfm/unnamed-chunk-2-1.png)<!-- -->
@@ -53,7 +55,8 @@ are printed in the console when the function is called on its own, and
 can also be assigned to an object for later use.
 
 ``` r
-purple_palette <- generate_palette("purple", modification = "go_both_ways", n_colours = 20, view_palette = T, view_labels = F)
+purple_palette <- generate_palette("purple", modification = "go_both_ways", 
+                                   n_colours = 20, view_palette = T, view_labels = F)
 ```
 
 ![](README_files/figure-gfm/unnamed-chunk-3-1.png)<!-- -->
@@ -70,28 +73,16 @@ And just because it was easy to implement, this function can also be
 used to blend two colours together:
 
 ``` r
-generate_palette("purple", blend_colour = "green", n_colours = 10, view_palette = T, view_labels = F)
+generate_palette("purple", blend_colour = "green", 
+                 n_colours = 10, view_palette = T, view_labels = F)
 ```
-
-    ## 
-    ## Because you supplied a blend_colour, the modification variable is set to "blend".
-    ## To use other modification options ("go_darker", "go_lighter" or "go_both_ways"),
-    ## leave blend_colour as NULL.
 
 ![](README_files/figure-gfm/unnamed-chunk-4-1.png)<!-- -->
 
     ##  [1] "#A020F0" "#9133DA" "#8347C5" "#755BB0" "#676F9A" "#588385" "#4A9670"
     ##  [8] "#3CAA5A" "#2EBE45" "#20D230"
 
-### Why not just use the `alpha` aesthetic?
-
-Having all solid colours allow us to use `alpha` more interestingly (for
-example, to highlight distance from model predictions), and allows
-better colour control when the background of the plot isn’t white.
-
-### The functions that make up `generate_palette()` are also useful in and of themselves
-
-#### Get the hex colour code from an rgb or rgba vector
+### Get the hex colour code from an rgb or rgba vector
 
 ``` r
 # Get hex code from rgb
@@ -122,9 +113,9 @@ view_palette(c(wesanderson::wes_palettes$Moonrise1,
 
 ![](README_files/figure-gfm/unnamed-chunk-6-2.png)<!-- -->
 
-## Pulling it all together
+## Worked examples: using `monochromeR` within datavisualisations
 
-### Simple plot example
+### Using `generate_palette` within `scale_colour_manual()`
 
 Here’s a simple example, using `{monochromeR}`’s `generate_palette()` to
 create a colour palette on the fly within `ggplot()`.
@@ -140,7 +131,7 @@ penguin_plot <- palmerpenguins::penguins %>%
              alpha = 0.8) +
  
   labs(title = "Perfectly proportional penguins", 
-       subtitle = "\nEach dot represents a penguin. The bigger the dot, the heavier the penguin. Look at them go!",
+       subtitle = "\nEach dot represents a penguin. The bigger the dot, the heavier the penguin. \nLook at them go!",
        x = "Flipper length (mm)",
        y = "Bill length (mm)") +
    scale_size(guide = "none") +
@@ -163,16 +154,13 @@ penguin_plot
 
 ![](README_files/figure-gfm/unnamed-chunk-7-2.png)<!-- -->
 
-### Creating a unified aesthetic across all aspects of the plot
+### Creating a unified aesthetic across all aspects of the dataviz
 
 Here’s an example using `{monochromeR}`’s `generate_palette()` to
 generate all the colours used in the plot, resulting in a more polished
 look with minimal effort.
 
 ``` r
-library(tidyverse)
-library(monochromeR)
-
 penguin_palette <- generate_palette(c(15, 75, 99), 
                                     modification = "go_both_ways", 
                                     n_colours = 8,
@@ -190,16 +178,17 @@ penguin_plot +
           panel.grid = element_line(colour = penguin_palette[7]),
           panel.background = element_rect(fill = penguin_palette[8], 
                                           colour = penguin_palette[8]),
-         legend.position = "top",
           text = element_text(colour = penguin_palette[3]),
           axis.text = element_text(colour = penguin_palette[3]),
-          plot.title = element_text(colour = penguin_palette[1], hjust = 0, size = 18),
-          plot.subtitle = element_text(colour = penguin_palette[2], hjust = 0, size = 10))
+          plot.title = element_text(colour = penguin_palette[1], hjust = 0),
+          plot.subtitle = element_text(colour = penguin_palette[2], hjust = 0))
 ```
 
 ![](README_files/figure-gfm/unnamed-chunk-8-2.png)<!-- -->
 
-## Finally, here are some resources I found helpful in making this package
+## Extra resources
+
+### Here are some resources I found helpful in making this package
 
 -   **For the mechanics of how to make a package**: [Your first R
     package in 1
@@ -211,9 +200,10 @@ penguin_plot +
     package](https://github.com/GuangchuangYu/hexSticker) by Guangchuang
     Yu
 
-## Bugs and queries
+### Bugs and queries
 
-I’ve done my best to make the error messages easy to understand. If you
-come across a bug or an error message that doesn’t make sense, or if
-there’s something you think would make this package better, [please let
-me know](https://github.com/cararthompson/monochromeR/issues)!
+I’ve done my best to make the functions in this package user-friendly,
+and to make the error messages easy to understand. If you come across a
+bug or an error message that doesn’t make sense, or if there’s something
+you think would make this package better, [please let me
+know](https://github.com/cararthompson/monochromeR/issues)!
