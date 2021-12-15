@@ -139,7 +139,7 @@ penguin_plot +
                                           colour = penguin_palette[8]),
           text = element_text(colour = penguin_palette[3]),
           axis.text = element_text(colour = penguin_palette[3]),
-          plot.title = element_text(colour = penguin_palette[1], hjust = 0),
+          plot.title = element_text(colour = penguin_palette[1], hjust = 0, size = 16),
           plot.subtitle = element_text(colour = penguin_palette[2], hjust = 0))
 
 ```
