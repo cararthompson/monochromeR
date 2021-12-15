@@ -5,46 +5,51 @@
 \title{Generate a monochrome palette}
 \usage{
 generate_palette(
-  color,
+  colour,
   modification,
-  n_colors,
-  blend_color = NULL,
+  n_colours,
+  blend_colour = NULL,
   view_palette = FALSE,
   view_labels = TRUE
 )
 }
 \arguments{
-\item{color}{The anchor color for the palette, which must be either be a recognised color name (e.g. "white"),
-a hex color code (e.g. "#ffffff") or vector of length 3 (red value, green value, blue value, e.g. c(15, 75, 99)),
+\item{colour}{The anchor colour for the palette, which must be either be a recognised colour name (e.g. "white"),
+a hex colour code (e.g. "#ffffff") or vector of length 3 (red value, green value, blue value, e.g. c(15, 75, 99)),
 with all values between 0 and 255. The default value is white ("#ffffff").}
 
 \item{modification}{One of the following: "go_darker", "go_lighter", "go_both_ways", or "blend".
-If a \code{blend_color} is supplied, \code{modification} is automatically set to "blend".}
+If a \code{blend_colour} is supplied, \code{modification} is automatically set to "blend".}
 
-\item{n_colors}{Number of colors (levels) required in the palette}
+\item{n_colours}{Number of colours (levels) required in the palette}
 
-\item{blend_color}{Optional. Can be either be a recognised color name (e.g. "white"),
-a hex color code (e.g. "#ffffff") or vector of length 3 (red value, green value, blue value, e.g. c(15, 75, 99)),
+\item{blend_colour}{Optional. Can be either be a recognised colour name (e.g. "white"),
+a hex colour code (e.g. "#ffffff") or vector of length 3 (red value, green value, blue value, e.g. c(15, 75, 99)),
 with all values between 0 and 255. The default value is white ("#ffffff").}
 
 \item{view_palette}{Logical. \code{view_palette = TRUE} displays the palette in the plot window.}
 
 \item{view_labels}{Logical. If view_palette is set to TRUE, view_labels = FALSE determines whether or
-not the hex color codes are shown on the palette displayed in the plot window.}
+not the hex colour codes are shown on the palette displayed in the plot window.}
 }
 \value{
-A vector of hex color codes making up the generated palette
+A vector of hex colour codes making up the generated palette
 }
 \description{
-This function allows users generate a monochrome color palette
-with any number of levels, starting from any color. The \code{modification}
+This function allows users generate a monochrome colour palette
+with any number of levels, starting from any colour. The \code{modification}
 parameter can be set to make the palette go darker, lighter, or both
-ways from the starting color. The function also allows users to create
-a pelette that goes from one color to another, by providing a \code{blend_color}.
+ways from the starting colour. The function also allows users to create
+a pelette that goes from one colour to another, by providing a \code{blend_colour}.
 }
 \examples{
-generate_palette("red", modification = "go_lighter", n_colors = 5, view_palette = TRUE, view_labels = TRUE)
-generate_palette(c(15, 75, 99), modification = "go_both_ways", n_colors = 12, view_palette = TRUE, view_labels = FALSE)
-generate_palette("red", blend_color = "blue", n_colors = 6, view_palette = TRUE)
+generate_palette("red", modification = "go_lighter",
+n_colours = 5, view_palette = TRUE, view_labels = TRUE)
+
+generate_palette(c(15, 75, 99), modification = "go_both_ways",
+n_colours = 12, view_palette = TRUE, view_labels = FALSE)
+
+generate_palette("red", blend_colour = "blue",
+n_colours = 6, view_palette = TRUE)
 
 }

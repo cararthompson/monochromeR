@@ -4,18 +4,18 @@
 \alias{rgba_to_hex}
 \title{rgba_to_hex}
 \usage{
-rgba_to_hex(color_rgba, background_color = "#ffffff")
+rgba_to_hex(colour_rgba, background_colour = "#ffffff")
 }
 \arguments{
-\item{color_rgba}{A vector of length 4: c(red value, green value, blue value, alpha).
+\item{colour_rgba}{A vector of length 4: c(red value, green value, blue value, alpha).
 All colour values must be between 0 and 255. Alpha must be between 0 and 1.}
 
-\item{background_color}{The background color must either be a recognised color name (e.g. "white"),
-a hex color code (e.g. "#ffffff") or vector of length 3 (red value, green value, blue value),
+\item{background_colour}{The background colour must either be a recognised colour name (e.g. "white"),
+a hex colour code (e.g. "#ffffff") or vector of length 3 (red value, green value, blue value),
 with all values between 0 and 255. The default value is white ("#ffffff").}
 }
 \value{
-Returns the corresponding hex color code
+Returns the corresponding hex colour code
 }
 \description{
 rgba_to_hex

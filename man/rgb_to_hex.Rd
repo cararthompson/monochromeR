@@ -2,7 +2,7 @@
 % Please edit documentation in R/helper_functions.R
 \name{rgb_to_hex}
 \alias{rgb_to_hex}
-\title{Converts RGB values to hex color code}
+\title{Converts RGB values to hex colour code}
 \usage{
 rgb_to_hex(x)
 }
@@ -10,10 +10,10 @@ rgb_to_hex(x)
 \item{x}{A matrix of red, blue and green values}
 }
 \value{
-A corresponding hex color code
+A corresponding hex colour code
 }
 \description{
-Converts RGB values to hex color code
+Converts RGB values to hex colour code
 }
 \examples{
 temp_rgb_matrix <- rgba_to_rgb(c(52, 46, 39, 0.8))

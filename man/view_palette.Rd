@@ -7,18 +7,18 @@
 view_palette(monochrome_palette, view_labels = TRUE)
 }
 \arguments{
-\item{monochrome_palette}{Vector of hex color codes, or a \code{generate_palette()} call}
+\item{monochrome_palette}{Vector of hex colour codes, or a \code{generate_palette()} call}
 
 \item{view_labels}{Logical. If \code{view_palette} is set to TRUE, \code{view_labels} determines whether or
-not the hex color codes are shown on the palette displayed in the plot window.}
+not the hex colour codes are shown on the palette displayed in the plot window.}
 }
 \value{
-A plot showing all the colors in the palette on the same row
+A plot showing all the colours in the palette on the same row
 }
 \description{
 Easy way to view the created palette
 }
 \examples{
 view_palette(c("#464E69", "#8C90A1", "#D1D2D9"))
-view_palette(generate_palette("pink", "go_darker", n_colors = 3))
+view_palette(generate_palette("pink", "go_darker", n_colours = 3))
 }
