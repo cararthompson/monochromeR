@@ -21,6 +21,7 @@
 #' @param view_palette Logical. `view_palette = TRUE` displays the palette in the plot window.
 #' @param view_labels Logical. If view_palette is set to TRUE, view_labels = FALSE determines whether or
 #' not the hex colour codes are shown on the palette displayed in the plot window.
+#' @param ... Allows for US spellimg of colour/color
 #'
 #' @return A vector of hex colour codes making up the generated palette
 #' @export
@@ -36,7 +37,22 @@
 #'
 generate_palette <- function(colour, modification, n_colours,
                              blend_colour = NULL,
-                             view_palette = FALSE, view_labels = TRUE) {
+                             view_palette = FALSE, view_labels = TRUE, ...) {
+
+  # Allows for US spelling input
+  check_dots <- list(...)
+
+  if(missing(colour) & "color" %in% names(check_dots)) {
+    colour <- check_dots$color
+  }
+
+  if(missing(n_colours) & "n_colors" %in% names(check_dots)) {
+    n_colours <- check_dots$n_colors
+  }
+
+  if("blend_color" %in% names(check_dots)) {
+   blend_colour <- check_dots$blend_color
+  }
 
   col_rgb <- check_colour_return_rgb(colour, "colour")
   if(!is.null(blend_colour)){

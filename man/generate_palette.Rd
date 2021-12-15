@@ -10,7 +10,8 @@ generate_palette(
   n_colours,
   blend_colour = NULL,
   view_palette = FALSE,
-  view_labels = TRUE
+  view_labels = TRUE,
+  ...
 )
 }
 \arguments{
@@ -31,6 +32,8 @@ with all values between 0 and 255. The default value is white ("#ffffff").}
 
 \item{view_labels}{Logical. If view_palette is set to TRUE, view_labels = FALSE determines whether or
 not the hex colour codes are shown on the palette displayed in the plot window.}
+
+\item{...}{Allows for US spellimg of colour/color}
 }
 \value{
 A vector of hex colour codes making up the generated palette
