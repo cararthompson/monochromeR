@@ -15,9 +15,9 @@ generate_palette(
 )
 }
 \arguments{
-\item{colour}{The anchor colour for the palette, which must be either be a recognised colour name (e.g. "white"),
+\item{colour}{The starting colour for the palette, which must be either be a recognised colour name (e.g. "white"),
 a hex colour code (e.g. "#ffffff") or vector of length 3 (red value, green value, blue value, e.g. c(15, 75, 99)),
-with all values between 0 and 255. The default value is white ("#ffffff").}
+with all values between 0 and 255.}
 
 \item{modification}{One of the following: "go_darker", "go_lighter", "go_both_ways", or "blend".
 If a \code{blend_colour} is supplied, \code{modification} is automatically set to "blend".}
@@ -26,24 +26,24 @@ If a \code{blend_colour} is supplied, \code{modification} is automatically set t
 
 \item{blend_colour}{Optional. Can be either be a recognised colour name (e.g. "white"),
 a hex colour code (e.g. "#ffffff") or vector of length 3 (red value, green value, blue value, e.g. c(15, 75, 99)),
-with all values between 0 and 255. The default value is white ("#ffffff").}
+with all values between 0 and 255.}
 
 \item{view_palette}{Logical. \code{view_palette = TRUE} displays the palette in the plot window.}
 
 \item{view_labels}{Logical. If view_palette is set to TRUE, view_labels = FALSE determines whether or
 not the hex colour codes are shown on the palette displayed in the plot window.}
 
-\item{...}{Allows for US spellimg of colour/color}
+\item{...}{Allows for US spelling of color/colour.}
 }
 \value{
 A vector of hex colour codes making up the generated palette
 }
 \description{
 This function allows users generate a monochrome colour palette
-with any number of levels, starting from any colour. The \code{modification}
+containing any number of colours, starting from the colour they specify. The \code{modification}
 parameter can be set to make the palette go darker, lighter, or both
 ways from the starting colour. The function also allows users to create
-a pelette that goes from one colour to another, by providing a \code{blend_colour}.
+a palette that goes from one colour to another, by providing a \code{blend_colour}.
 }
 \examples{
 generate_palette("red", modification = "go_lighter",

@@ -16,7 +16,7 @@ the hex code for their original colour blended with a specified background colou
 a hex colour code (e.g. "#ffffff") or vector of length 3 (red value, green value, blue value),
 with all values between 0 and 255. The default value is white ("#ffffff").}
 
-\item{...}{Allows for US spelling of color/colour}
+\item{...}{Allows for US spelling of color/colour.}
 }
 \value{
 A matrix of red, green and blue values

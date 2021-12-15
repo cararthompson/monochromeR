@@ -7,7 +7,7 @@
 #' `background_colour` must either be a recognised colour name (e.g. "white"),
 #' a hex colour code (e.g. "#ffffff") or vector of length 3 (red value, green value, blue value),
 #' with all values between 0 and 255. The default value is white ("#ffffff").
-#' @param ... Allows for US spelling of color/colour
+#' @param ... Allows for US spelling of color/colour.
 #'
 #' @return Returns the corresponding hex colour code
 #' @export
