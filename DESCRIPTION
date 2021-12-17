@@ -1,5 +1,5 @@
 Package: monochromeR
-Title: Creating Monochrome Colour Palettes
+Title: Easily Create, View and Use Monochrome Colour Palettes
 Version: 0.0.0.9000
 Authors@R: 
     person(given = "Cara",
@@ -7,7 +7,12 @@ Authors@R:
            role = c("aut", "cre"),
            email = "cara.r.thompson@gmail.com",
            comment = c(ORCID = "0000-0002-6472-5073"))
-Description: What the package does (one paragraph).
+Description: Generate a monochrome palette from a starting colour 
+    for a specified number of colours. Users can decide whether to go darker, lighter, 
+    or both ways from that starting colour, which can be provided as a vector of RGB 
+    values (e.g. c(15, 75, 99)), a Hex colour code (e.g. "#0F4B63") or a recognised 
+    colour name (e.g. "purple"). The package can also display the generated palette 
+    in the plot window, with or without hex colour code labels.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
@@ -15,5 +20,6 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.0
 URL: https://github.com/cararthompson/monochromeR
 BugReports: https://github.com/cararthompson/monochromeR/issues
+Maintainer: Cara Thompson <cara.r.thompson@gmail.com>
 Imports: 
     scales
