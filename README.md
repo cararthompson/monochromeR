@@ -15,7 +15,10 @@ or without hex colour code labels.
 
 ## How can I use it?
 
-To install it, use
+This package is available on [CRAN](https://cran.r-project.org/), so can
+be installed using `install.packages("monochromeR")`.
+
+Alternatively, to install it from here, use
 `remotes::github_install("cararthompson/monochromeR")`. (To do this, you
 need to have installed the `remotes` package. To do that, use
 `install.packages("remotes")`.)
