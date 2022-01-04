@@ -1,5 +1,12 @@
-monochromeR: an easy way to create monochrome colour palettes
+
+monochromeR: An easy way to create, view and use monochrome colour palettes
 ================
+
+
+<!-- badges: start -->
+[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/monochromeR)](https://cran.r-project.org/package=monochromeR)
+![](http://cranlogs.r-pkg.org/badges/grand-total/monochromeR?color=#0B3748)
+<!-- badges: end -->
 
 ![](inst/figures/logo-social.PNG)
 
@@ -8,19 +15,25 @@ monochromeR: an easy way to create monochrome colour palettes
 This package generates a monochrome palette from a starting colour for a
 specified number of colours. Users can decide whether to go darker,
 lighter, or both ways from that starting colour, which can be provided
-as a vector of rgb values (e.g. `c(15, 75, 99)`), a hex colour code
-(e.g. `#0F4B63`) or a recognised colour name (e.g. `"purple"`). The
+as a vector of rgb values (e.g.B `c(15, 75, 99)`), a hex colour code
+(e.g.B `#0F4B63`) or a recognised colour name (e.g.B `"purple"`). The
 package can also display the generated palette in the plot window, with
 or without hex colour code labels.
 
 ## How can I use it?
 
 This package is available on [CRAN](https://cran.r-project.org/), so can
-be installed using `install.packages("monochromeR")`.
+be installed using 
+```r 
+install.packages("monochromeR")
+```
 
 Alternatively, to install it from here, use
-`remotes::github_install("cararthompson/monochromeR")`. (To do this, you
-need to have installed the `remotes` package. To do that, use
+```r
+remotes::github_install("cararthompson/monochromeR")
+```
+
+(To do that, you need to have installed the `remotes` package. To do that, use
 `install.packages("remotes")`.)
 
 ## Can we see some examples?
@@ -120,7 +133,7 @@ view_palette(c(wesanderson::wes_palettes$Moonrise1,
 
 ### Using `generate_palette` within `scale_colour_manual()`
 
-Here’s a simple example, using `{monochromeR}`’s `generate_palette()` to
+Heres a simple example, using `{monochromeR}`s `generate_palette()` to
 create a colour palette on the fly within `ggplot()`.
 
 ``` r
@@ -159,7 +172,7 @@ penguin_plot
 
 ### Creating a unified aesthetic across all aspects of the dataviz
 
-Here’s an example using `{monochromeR}`’s `generate_palette()` to
+Heres an example using `{monochromeR}`s `generate_palette()` to
 generate all the colours used in the plot, resulting in a more polished
 look with minimal effort.
 
@@ -205,8 +218,8 @@ penguin_plot +
 
 ### Bugs and queries
 
-I’ve done my best to make the functions in this package user-friendly,
+Ive done my best to make the functions in this package user-friendly,
 and to make the error messages easy to understand. If you come across a
-bug or an error message that doesn’t make sense, or if there’s something
+bug or an error message that doesnt make sense, or if theres something
 you think would make this package better, [please let me
 know](https://github.com/cararthompson/monochromeR/issues)!
