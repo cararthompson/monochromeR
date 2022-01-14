@@ -15,8 +15,8 @@ monochromeR: An easy way to create, view and use monochrome colour palettes
 This package generates a monochrome palette from a starting colour for a
 specified number of colours. Users can decide whether to go darker,
 lighter, or both ways from that starting colour, which can be provided
-as a vector of rgb values (e.g.B `c(15, 75, 99)`), a hex colour code
-(e.g.B `#0F4B63`) or a recognised colour name (e.g.B `"purple"`). The
+as a vector of rgb values (e.g. `c(15, 75, 99)`), a hex colour code
+(e.g. `#0F4B63`) or a recognised colour name (e.g. `"purple"`). The
 package can also display the generated palette in the plot window, with
 or without hex colour code labels.
 
