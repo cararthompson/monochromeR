@@ -1,5 +1,4 @@
-
-monochromeR: An easy way to create, view and use monochrome colour palettes
+monochromeR: an easy way to create monochrome colour palettes
 ================
 
 
@@ -12,28 +11,23 @@ monochromeR: An easy way to create, view and use monochrome colour palettes
 
 ## What does the package do?
 
+
 This package generates a monochrome palette from a starting colour for a
 specified number of colours. Users can decide whether to go darker,
 lighter, or both ways from that starting colour, which can be provided
-as a vector of rgb values (e.g.B `c(15, 75, 99)`), a hex colour code
-(e.g.B `#0F4B63`) or a recognised colour name (e.g.B `"purple"`). The
+as a vector of rgb values (e.g. `c(15, 75, 99)`), a hex colour code
+(e.g. `#0F4B63`) or a recognised colour name (e.g. `"purple"`). The
 package can also display the generated palette in the plot window, with
 or without hex colour code labels.
 
 ## How can I use it?
 
 This package is available on [CRAN](https://cran.r-project.org/), so can
-be installed using 
-```r 
-install.packages("monochromeR")
-```
+be installed using `install.packages("monochromeR")`.
 
 Alternatively, to install it from here, use
-```r
-remotes::github_install("cararthompson/monochromeR")
-```
-
-(To do that, you need to have installed the `remotes` package. To do that, use
+`remotes::github_install("cararthompson/monochromeR")`. (To do this, you
+need to have installed the `remotes` package. To do that, use
 `install.packages("remotes")`.)
 
 ## Can we see some examples?
@@ -47,7 +41,7 @@ recognised colour names rather than hex codes or rgb values.
 library(monochromeR)
 
 generate_palette("purple", modification = "go_lighter", 
-                 n_colours = 5, view_palette = T)
+                 n_colours = 5, view_palette = TRUE)
 ```
 
 ![](README_files/figure-gfm/unnamed-chunk-1-1.png)<!-- -->
@@ -59,7 +53,7 @@ colour/color.
 
 ``` r
 generate_palette("purple", modification = "go_darker", 
-                 n_colors = 5, view_palette = T, view_labels = F)
+                 n_colors = 5, view_palette = TRUE, view_labels = FALSE)
 ```
 
 ![](README_files/figure-gfm/unnamed-chunk-2-1.png)<!-- -->
@@ -72,7 +66,7 @@ can also be assigned to an object for later use.
 
 ``` r
 purple_palette <- generate_palette("purple", modification = "go_both_ways", 
-                                   n_colours = 20, view_palette = T, view_labels = F)
+                                   n_colours = 20, view_palette = TRUE, view_labels = FALSE)
 ```
 
 ![](README_files/figure-gfm/unnamed-chunk-3-1.png)<!-- -->
@@ -90,7 +84,7 @@ used to blend two colours together:
 
 ``` r
 generate_palette("purple", blend_colour = "green", 
-                 n_colours = 10, view_palette = T, view_labels = F)
+                 n_colours = 10, view_palette = TRUE, view_labels = FALSE)
 ```
 
 ![](README_files/figure-gfm/unnamed-chunk-4-1.png)<!-- -->
@@ -117,7 +111,7 @@ rgba_to_hex(c(15, 75, 99, 0.8))
 #### View any palette, with or without labels
 
 ``` r
-view_palette(c("red", "yellow", "purple", "green"), view_labels = F)
+view_palette(c("red", "yellow", "purple", "green"), view_labels = FALSE)
 ```
 
 ![](README_files/figure-gfm/unnamed-chunk-6-1.png)<!-- -->
@@ -129,11 +123,31 @@ view_palette(c(wesanderson::wes_palettes$Moonrise1,
 
 ![](README_files/figure-gfm/unnamed-chunk-6-2.png)<!-- -->
 
+## Easily pass the output to functions which check accessibility
+
+Version 0.1.3 onwards exports a ggplot object, which can be passed to
+functions such as colorblindr::cvd_grid() to check how the palette is
+perceived by people with different visual perception. With
+`view_labels = TRUE`, the labels are displayed in black and white on top
+of the colour, to allow users to easily see how readable the text is.
+
+``` r
+view_palette(c("red", "yellow", "purple", "green"), view_labels = TRUE)
+```
+
+![](README_files/figure-gfm/unnamed-chunk-7-1.png)<!-- -->
+
+``` r
+colorblindr::cvd_grid()
+```
+
+![](README_files/figure-gfm/unnamed-chunk-7-2.png)<!-- -->
+
 ## Worked examples: using `monochromeR` within datavisualisations
 
 ### Using `generate_palette` within `scale_colour_manual()`
 
-Heres a simple example, using `{monochromeR}`s `generate_palette()` to
+Here’s a simple example, using `{monochromeR}`’s `generate_palette()` to
 create a colour palette on the fly within `ggplot()`.
 
 ``` r
@@ -157,7 +171,7 @@ penguin_plot <- palmerpenguins::penguins %>%
 penguin_plot
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-7-1.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-8-1.png)<!-- -->
 
 ``` r
 penguin_plot <- penguin_plot +
@@ -168,11 +182,11 @@ penguin_plot <- penguin_plot +
 penguin_plot
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-7-2.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-8-2.png)<!-- -->
 
 ### Creating a unified aesthetic across all aspects of the dataviz
 
-Heres an example using `{monochromeR}`s `generate_palette()` to
+Here’s an example using `{monochromeR}`’s `generate_palette()` to
 generate all the colours used in the plot, resulting in a more polished
 look with minimal effort.
 
@@ -184,7 +198,7 @@ penguin_palette <- generate_palette(c(15, 75, 99),
                                     view_labels = F)
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-8-1.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-9-1.png)<!-- -->
 
 ``` r
 penguin_plot +
@@ -200,7 +214,7 @@ penguin_plot +
           plot.subtitle = element_text(colour = penguin_palette[2], hjust = 0))
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-8-2.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-9-2.png)<!-- -->
 
 ## Extra resources
 
@@ -218,8 +232,8 @@ penguin_plot +
 
 ### Bugs and queries
 
-Ive done my best to make the functions in this package user-friendly,
+I’ve done my best to make the functions in this package user-friendly,
 and to make the error messages easy to understand. If you come across a
-bug or an error message that doesnt make sense, or if theres something
+bug or an error message that doesn’t make sense, or if there’s something
 you think would make this package better, [please let me
 know](https://github.com/cararthompson/monochromeR/issues)!

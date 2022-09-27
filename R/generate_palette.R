@@ -95,7 +95,7 @@ leave blend_colour as NULL.")
   }
 
   if(view_palette == TRUE) {
-    view_palette(generated_palette, view_labels = view_labels)
+    print(view_palette(generated_palette, view_labels = view_labels))
   }
 
   return(generated_palette)
