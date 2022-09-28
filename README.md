@@ -11,7 +11,6 @@ monochromeR: An easy way to create monochrome colour palettes
 
 ## What does the package do?
 
-
 This package generates a monochrome palette from a starting colour for a
 specified number of colours. Users can decide whether to go darker,
 lighter, or both ways from that starting colour, which can be provided
@@ -147,7 +146,7 @@ colorblindr::cvd_grid()
 
 ### Using `generate_palette` within `scale_colour_manual()`
 
-Here?s a simple example, using `{monochromeR}`?s `generate_palette()` to
+Here’s a simple example, using `{monochromeR}`’s `generate_palette()` to
 create a colour palette on the fly within `ggplot()`.
 
 ``` r
@@ -186,7 +185,7 @@ penguin_plot
 
 ### Creating a unified aesthetic across all aspects of the dataviz
 
-Here?s an example using `{monochromeR}`?s `generate_palette()` to
+Here’s an example using `{monochromeR}`’s `generate_palette()` to
 generate all the colours used in the plot, resulting in a more polished
 look with minimal effort.
 
@@ -232,8 +231,8 @@ penguin_plot +
 
 ### Bugs and queries
 
-I?ve done my best to make the functions in this package user-friendly,
+I’ve done my best to make the functions in this package user-friendly,
 and to make the error messages easy to understand. If you come across a
-bug or an error message that doesn?t make sense, or if there?s something
+bug or an error message that doesn’t make sense, or if there’s something
 you think would make this package better, [please let me
 know](https://github.com/cararthompson/monochromeR/issues)!
