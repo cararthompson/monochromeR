@@ -19,4 +19,5 @@ URL: https://github.com/cararthompson/monochromeR
 BugReports: https://github.com/cararthompson/monochromeR/issues
 Maintainer: Cara Thompson <cara.r.thompson@gmail.com>
 Imports: 
-    ggplot2
+    ggplot2,
+    magrittr
