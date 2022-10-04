@@ -1,6 +1,6 @@
 Package: monochromeR
 Title: Easily Create, View and Use Monochrome Colour Palettes
-Version: 0.1.3
+Version: 0.1.4
 Authors@R: 
     person(given = "Cara",
            family = "Thompson",
