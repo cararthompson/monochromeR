@@ -25,7 +25,7 @@ This package is available on [CRAN](https://cran.r-project.org/), so can
 be installed using `install.packages("monochromeR")`.
 
 Alternatively, to install it from here, use
-`remotes::github_install("cararthompson/monochromeR")`. (To do this, you
+`remotes::install_github("cararthompson/monochromeR")`. (To do this, you
 need to have installed the `remotes` package. To do that, use
 `install.packages("remotes")`.)
 
