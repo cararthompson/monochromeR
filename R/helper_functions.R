@@ -107,4 +107,22 @@ rgb_to_hex <- function(x){
   grDevices::rgb(x[1], x[2], x[3], maxColorValue = 255)
 }
 
+#' Converts Hex codes values to RGB vectors
+#'
+#' @param x A hex colour code
+#'
+#' @return A corresponding matrix of red, blue and green values
+#' @export
+#'
+#' @examples hex_to_rgb("purple")
+#' hex_to_rgb("#fafafa")
+#'
+hex_to_rgb <- function(x){
+
+  temp_tibble <- as.data.frame(grDevices::col2rgb(x, alpha = FALSE))
+
+  paste0(c("r = ", "g = ", "b = "), temp_tibble$V1,
+         collapse = ", ")
+}
+
 
