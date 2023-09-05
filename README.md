@@ -110,14 +110,14 @@ rgba_to_hex(c(15, 75, 99, 0.8))
 ### Get the rgb values from a hex code
 
 ``` r
-# Get hex code from rgb
+# Get the rgb values from the hex code
 hex_to_rgb("#FFFFFF")
 ```
 
     ## [1] "r = 255, g = 255, b = 255"
 
 ``` r
-# Get hex code from rgb
+# Get the rgb values from the hex code
 hex_to_rgb("#0F4B63")
 ```
 
