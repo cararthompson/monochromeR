@@ -20,5 +20,6 @@ Easy way to view the created palette
 }
 \examples{
 view_palette(c("#464E69", "#8C90A1", "#D1D2D9"))
+view_palette(c("unripe" = "#89973d", "ripe" = "#e8b92f", "overripe" = "#a45e41"))
 view_palette(generate_palette("pink", "go_darker", n_colours = 3))
 }

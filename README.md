@@ -107,20 +107,50 @@ rgba_to_hex(c(15, 75, 99, 0.8))
 
     ## [1] "#3E6E82"
 
+### Get the rgb values from a hex code
+
+``` r
+# Get hex code from rgb
+hex_to_rgb("#FFFFFF")
+```
+
+    ## [1] "r = 255, g = 255, b = 255"
+
+``` r
+# Get hex code from rgb
+hex_to_rgb("#0F4B63")
+```
+
+    ## [1] "r = 15, g = 75, b = 99"
+
 #### View any palette, with or without labels
 
 ``` r
 view_palette(c("red", "yellow", "purple", "green"), view_labels = FALSE)
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-6-1.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-7-1.png)<!-- -->
 
 ``` r
 view_palette(c(wesanderson::wes_palettes$Moonrise1,
                wesanderson::wes_palettes$Moonrise2[1:2]))
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-6-2.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-7-2.png)<!-- -->
+
+From version 0.2.0 onwards, if you have created a named vector for your
+colours (which I highly recommend!), the names you have provided are
+displayed alongside the hex codes.
+
+``` r
+banana_palette <- c("unripe" = "#89973d", 
+                    "ripe" = "#e8b92f", 
+                    "overripe" = "#a45e41")
+
+view_palette(banana_palette)
+```
+
+![](README_files/figure-gfm/unnamed-chunk-8-1.png)<!-- -->
 
 ## Easily pass the output to functions which check accessibility
 
@@ -134,13 +164,13 @@ of the colour, to allow users to easily see how readable the text is.
 view_palette(c("red", "yellow", "purple", "green"), view_labels = TRUE)
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-7-1.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-9-1.png)<!-- -->
 
 ``` r
 colorblindr::cvd_grid()
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-7-2.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-10-1.png)<!-- -->
 
 ## Worked examples: using `monochromeR` within datavisualisations
 
@@ -158,19 +188,19 @@ penguin_plot <- palmerpenguins::penguins %>%
   geom_point(aes(x = flipper_length_mm, y = bill_length_mm, 
                  colour = species, size = body_mass_g),
              alpha = 0.8) +
- 
   labs(title = "Perfectly proportional penguins", 
-       subtitle = "\nEach dot represents a penguin. The bigger the dot, the heavier the penguin. \nLook at them go!",
+       subtitle = "Each dot represents a penguin. The bigger the dot, the heavier the penguin. \nLook at them go!",
        x = "Flipper length (mm)",
        y = "Bill length (mm)") +
    scale_size(guide = "none") +
  guides(colour = guide_legend(title = "")) +
-  theme_minimal() 
+  theme_minimal() +
+  theme(plot.subtitle = element_text(margin = margin(6, 0, 12, 0)))
 
 penguin_plot
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-8-1.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-11-1.png)<!-- -->
 
 ``` r
 penguin_plot <- penguin_plot +
@@ -181,7 +211,7 @@ penguin_plot <- penguin_plot +
 penguin_plot
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-8-2.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-11-2.png)<!-- -->
 
 ### Creating a unified aesthetic across all aspects of the dataviz
 
@@ -197,11 +227,12 @@ penguin_palette <- generate_palette(c(15, 75, 99),
                                     view_labels = F)
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-9-1.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-12-1.png)<!-- -->
 
 ``` r
 penguin_plot +
-  theme_minimal() %+replace%
+   scale_colour_manual(values = penguin_palette[c(1, 3, 5)]) +
+  theme_minimal() +
     theme(plot.background = element_rect(fill = penguin_palette[8], 
                                          colour = penguin_palette[8]),
           panel.grid = element_line(colour = penguin_palette[7]),
@@ -213,7 +244,7 @@ penguin_plot +
           plot.subtitle = element_text(colour = penguin_palette[2], hjust = 0))
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-9-2.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-13-1.png)<!-- -->
 
 ## Extra resources
 
@@ -221,13 +252,13 @@ penguin_plot +
 
 -   **For the mechanics of how to make a package**: [Your first R
     package in 1
-    hour](https://www.pipinghotdata.com/posts/2020-10-25-your-first-r-package-in-1-hour/),
-    a tutorial by Shannon Pileggi
--   **For the colour conversions**: [This thread on
-    StackOverflow](https://stackoverflow.com/questions/60977641/r-function-for-rgba-to-hex-colour-conversion)
--   **For the logo**: [The hexSticker
-    package](https://github.com/GuangchuangYu/hexSticker) by Guangchuang
-    Yu
+  hour](https://www.pipinghotdata.com/posts/2020-10-25-your-first-r-package-in-1-hour/),
+  a tutorial by Shannon Pileggi
+- **For the colour conversions**: [This thread on
+  StackOverflow](https://stackoverflow.com/questions/60977641/r-function-for-rgba-to-hex-colour-conversion)
+- **For the logo**: [The hexSticker
+  package](https://github.com/GuangchuangYu/hexSticker) by Guangchuang
+  Yu
 
 ### Bugs and queries
 

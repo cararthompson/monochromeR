@@ -1,15 +1,15 @@
 Package: monochromeR
 Title: Easily Create, View and Use Monochrome Colour Palettes
-Version: 0.1.5
+Version: 0.2.0
 Authors@R: 
     person(given = "Cara",
            family = "Thompson",
            role = c("aut", "cre"),
-           email = "cara.r.thompson@gmail.com",
+           email = "packages@cararthompson.com",
            comment = c(ORCID = "0000-0002-6472-5073"))
 Description: Generate a monochrome palette from a starting colour 
     for a specified number of colours. The package can also be used to display 
-    colour palettes in the plot window, with or without hex colour code labels.
+    colour palettes in the plot window, with or without hex codes and colour labels.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: false
