@@ -1,69 +1,165 @@
 ---
-title: "monochromeR: an easy way to create monochrome colour palettes"
 output: github_document
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-library(magrittr)
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-"
+)
 ```
 
-![](inst/figures/logo-social.PNG)
+# monochromeR <img src='man/figures/logo.png' style="float:right" height="250" />
 
-## What does the package do?
+**monochromeR** let's you create and view monochrome colour palettes. Two options are given to create palettes: go towards black and white from you start colour or "blend" your start colour with another colour. The package provide also a handy function to display a generated palette.
 
-This package generates a monochrome palette from a starting colour for a specified number of colours. Users can decide whether to go darker, lighter, or both ways from that starting colour, which can be provided as a vector of rgb values (e.g. `c(15, 75, 99)`), a hex colour code (e.g. `#0F4B63`) or a recognised colour name (e.g. `"purple"`). The package can also display the generated palette in the plot window, with or without hex colour code labels. 
+<!-- mention `rgb_to_hex()` and co if maintaining them -->
 
+**Please ensure accessibility criteria wherever you use colours.**
 
-## How can I use it?
+**Notice** Breaking chances were made with version 1.0.0. Please refer to the end of the README for breaking changes.
 
-This package is available on [CRAN](https://cran.r-project.org/), so can be installed using `install.packages("monochromeR")`. 
+## Installation
 
-Alternatively, to install it from here, use `remotes::install_github("cararthompson/monochromeR")`. (To do this, you need to have installed the `remotes` package. To do that, use `install.packages("remotes")`.)
+You can install the released version of {monochromeR} from [CRAN](https://CRAN.R-project.org) with:
 
+``` r
+install.packages("monochromeR")
+```
+
+If you want the development version instead then install directly from [GitHub](https://github.com/):
+
+```{r, eval = FALSE}
+# install.packages("devtools")
+devtools::install_github("cararthompson/monochromeR")
+```
 
 ## Can we see some examples?
 
-Sure! Here goes. To make the examples easy to read, I will use recognised colour names rather than hex codes or rgb values. 
+Sure! Let's get started right away.
 
-### Generate monochrome palettes with `generate_palette()`
-
-```{r, fig.height=2}
+```{r}
 library(monochromeR)
-
-generate_palette("purple", modification = "go_lighter", 
-                 n_colours = 5, view_palette = TRUE)
-
 ```
 
-The functions allow for British spelling and US spelling of colour/color. 
+### `palette_monochrome_blend()` and `palette_monochrome_bw()`
 
-```{r, fig.height=2}
-generate_palette("purple", modification = "go_darker", 
-                 n_colors = 5, view_palette = TRUE, view_labels = FALSE)
+You can see the returned hex values printed for example,
 
+```{r}
+palette_monochrome_blend("darkseagreen", blend_colour = "black", n_colours = 7)
+palette_monochrome_blend("#96410EFF", blend_colour =  "#418979FF", n_colours = 5)
 ```
 
-With more colours, the hex codes get harder to view in the plot. They are printed in the console when the function is called on its own, and can also be assigned to an object for later use. 
+or create a vector of them with a value (let's choose `my_palette`) assigned to it as illustrated next. This is handy, for example, if you want to use it elsewhere or multiple times.
 
-```{r, fig.height=2}
-purple_palette <- generate_palette("purple", modification = "go_both_ways", 
-                                   n_colours = 20, view_palette = TRUE, view_labels = FALSE)
-
-purple_palette
-
+```{r, fig.height = 2}
+my_palette <- palette_monochrome_blend(
+  "darkseagreen", blend_colour = "black", n_colours = 7
+  )
 ```
 
-And just because it was easy to implement, this function can also be used to blend two colours together:
+Let's get an impression by plotting these colours:
 
-```{r, message=F, warning=F, fig.height=2}
-generate_palette("purple", blend_colour = "green", 
-                 n_colours = 10, view_palette = TRUE, view_labels = FALSE)
-
+```{r, fig.height = 2}
+view_palette(my_palette)
 ```
 
+And take a look how people with a color vision deficiency might perceive these colours:
+
+```{r}
+prismatic::check_color_blindness(my_palette)
+```
+
+Things work similar for `palette_monochrome_bw()`, here's an example.
+
+```{r, fig.height = 2}
+view_palette(palette_monochrome_bw("violetred3", n_colours = 5))
+```
+
+### View any palette, with or without labels
+
+From version 0.2.0 onwards, if you have created a named vector for your colours, the names you have provided are displayed alongside the hex codes.
+
+```{r, fig.height = 2}
+banana_palette <- c(
+  "unripe" = "#89973d", "ripe" = "#e8b92f", "overripe" = "#a45e41"
+  )
+
+view_palette(banana_palette)
+```
+
+```{r, fig.height = 2}
+view_palette(
+  c(
+    wesanderson::wes_palettes$Moonrise1,
+    wesanderson::wes_palettes$Moonrise2[1:2]
+    )
+  )
+```
+
+If you're searching inspiration from a broad range of palettes, you may want to take a look at the [paletter](https://emilhvitfeldt.github.io/paletteer/) package as well.
+
+## Using `palette_monochrome_` within data visualisations
+
+### Within `scale_colour_manual()`
+
+Here's a simple example, using {monochromeR}'s `palette_monochrome_bw()` to create a colour palette on the fly within the {ggplot2} framework.
+
+```{r, eval = TRUE, echo = TRUE, warning = FALSE, message = FALSE}
+library(ggplot2)
+
+penguins_plot <- palmerpenguins::penguins |>
+  ggplot() +
+  geom_point(
+    aes(flipper_length_mm, bill_length_mm, colour = species, size = body_mass_g),
+    alpha = 0.8
+    ) +
+  labs(
+    title = "Famous palmer penguins", 
+    subtitle = "Each dot represents a penguin. The bigger the dot, the heavier the penguin. \nLook at them!",
+    x = "Flipper length (mm)",
+    y = "Bill length (mm)"
+    ) +
+  guides(
+    colour = guide_legend("Species", override.aes = list(size = 4)),
+    size = "none"
+    ) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(hjust = 0.5, size = 16),
+    plot.subtitle = element_text(hjust = 0.5)
+    )
+
+penguins_plot
+
+penguins_plot +
+ scale_colour_manual(values = palette_monochrome_bw("#0F4B63", n_colours = 3))
+```
+
+### Creating a unified aesthetic across all aspects of the dataviz
+
+Here's an example using `{monochromeR}`'s `palette_monochrome_bw()` to control the colours used in the plot, resulting in a more polished look with minimal effort.
+
+```{r, eval = TRUE, echo = TRUE, warning = FALSE, message = FALSE}
+pp <- palette_monochrome_bw("#0F4B63", n_colours = 17)
+
+penguins_plot +
+  scale_colour_manual(values = pp[c(9, 11, 13)]) +
+  theme(
+    plot.background = element_rect(fill = pp[2], colour = pp[2]),
+    panel.grid = element_line(colour = pp[5]),
+    panel.background = element_rect(fill = pp[2], colour = pp[2]),
+    text = element_text(colour = pp[16]),
+    axis.ticks = element_line(colour = pp[5]),
+    axis.text = element_text(colour = pp[16])
+    )
+```
 
 ### Get the hex colour code from an rgb or rgba vector
+
+<!-- to do -->
 
 ```{r}
 # Get hex code from rgb
@@ -72,11 +168,11 @@ rgb_to_hex(c(15, 75, 99))
 
 # Get hex code from rgba
 rgba_to_hex(c(15, 75, 99, 0.8))
-
 ```
 
-
 ### Get the rgb values from a hex code
+
+<!-- to do -->
 
 ```{r}
 # Get the rgb values from the hex code
@@ -84,115 +180,13 @@ hex_to_rgb("#FFFFFF")
 
 # Get the rgb values from the hex code
 hex_to_rgb("#0F4B63")
-
 ```
 
+## Breaking changes
 
-#### View any palette, with or without labels
+In versions <= 1.0.0 the function `generate_palette()` existed. It was deprecated with version 1.0.0. It's main intention is now given by `palette_monochrome_blend()` and `palette_monochrome_bw()`. 
 
-```{r, fig.height=2}
-view_palette(c("red", "yellow", "purple", "green"), view_labels = FALSE)
+## Bugs and queries
 
-view_palette(c(wesanderson::wes_palettes$Moonrise1,
-               wesanderson::wes_palettes$Moonrise2[1:2]))
+I've done my best to make the functions in this package user-friendly, and to make the error messages easy to understand. If you come across a bug or an error message that doesn't make sense, or if there's something you think would make this package better, please open an [issue](https://github.com/cararthompson/monochromeR/issues)!
 
-```
-
-From version 0.2.0 onwards, if you have created a named vector for your colours (which I highly recommend!), the names you have provided are displayed alongside the hex codes.
-
-```{r, fig.height=2}
-banana_palette <- c("unripe" = "#89973d", 
-                    "ripe" = "#e8b92f", 
-                    "overripe" = "#a45e41")
-
-view_palette(banana_palette)
-
-```
-
-## Easily pass the output to functions which check accessibility
-
-Version 0.1.3 onwards exports a ggplot object, which can be passed to functions such as colorblindr::cvd_grid() to check how the palette is perceived by people with different visual perception. With `view_labels = TRUE`, the labels are displayed in black and white on top of the colour, to allow users to easily see how readable the text is. 
-
-```{r, fig.height=2}
-view_palette(c("red", "yellow", "purple", "green"), view_labels = TRUE)
-```
-
-```{r, fig.height=4}
-colorblindr::cvd_grid()
-```
-
-## Worked examples: using `monochromeR` within datavisualisations
-
-### Using `generate_palette` within `scale_colour_manual()`
-
-Here's a simple example, using `{monochromeR}`'s `generate_palette()` to create a colour palette on the fly within `ggplot()`.
-
-```{r, eval=T, echo=T, warning=F, message=FALSE}
-library(tidyverse)
-library(monochromeR)
-
-penguin_plot <- palmerpenguins::penguins %>%
-  ggplot() +
-  geom_point(aes(x = flipper_length_mm, y = bill_length_mm, 
-                 colour = species, size = body_mass_g),
-             alpha = 0.8) +
-  labs(title = "Perfectly proportional penguins", 
-       subtitle = "Each dot represents a penguin. The bigger the dot, the heavier the penguin. \nLook at them go!",
-       x = "Flipper length (mm)",
-       y = "Bill length (mm)") +
-   scale_size(guide = "none") +
- guides(colour = guide_legend(title = "")) +
-  theme_minimal() +
-  theme(plot.subtitle = element_text(margin = margin(6, 0, 12, 0)))
-
-penguin_plot
-
-penguin_plot <- penguin_plot +
- scale_colour_manual(values = generate_palette(c(15, 75, 99), 
-                                    modification = "go_both_ways", 
-                                    n_colours = 3))
-
-penguin_plot
-
-```
-
-### Creating a unified aesthetic across all aspects of the dataviz
-
-Here's an example using `{monochromeR}`'s `generate_palette()` to generate all the colours used in the plot, resulting in a more polished look with minimal effort. 
-
-```{r, eval=T, echo=T, warning=F, message=FALSE, fig.height=2}
-penguin_palette <- generate_palette(c(15, 75, 99), 
-                                    modification = "go_both_ways", 
-                                    n_colours = 8,
-                                    view_palette = T,
-                                    view_labels = F)
-```
-
-```{r, eval=T, echo=T, warning=F, message=FALSE}
-
-penguin_plot +
-   scale_colour_manual(values = penguin_palette[c(1, 3, 5)]) +
-  theme_minimal() +
-    theme(plot.background = element_rect(fill = penguin_palette[8], 
-                                         colour = penguin_palette[8]),
-          panel.grid = element_line(colour = penguin_palette[7]),
-          panel.background = element_rect(fill = penguin_palette[8], 
-                                          colour = penguin_palette[8]),
-          text = element_text(colour = penguin_palette[3]),
-          axis.text = element_text(colour = penguin_palette[3]),
-          plot.title = element_text(colour = penguin_palette[1], hjust = 0, size = 16),
-          plot.subtitle = element_text(colour = penguin_palette[2], hjust = 0))
-```
-
-
-## Extra resources
-
-### Here are some resources I found helpful in making this package
-
-- **For the mechanics of how to make a package**: [Your first R package in 1 hour](https://www.pipinghotdata.com/posts/2020-10-25-your-first-r-package-in-1-hour/), a tutorial by Shannon Pileggi
-- **For the colour conversions**: [This thread on StackOverflow](https://stackoverflow.com/questions/60977641/r-function-for-rgba-to-hex-colour-conversion)
-- **For the logo**: [The hexSticker package](https://github.com/GuangchuangYu/hexSticker) by Guangchuang Yu
-
-### Bugs and queries
-
-I've done my best to make the functions in this package user-friendly, and to make the error messages easy to understand. If you come across a bug or an error message that doesn't make sense, or if there's something you think would make this package better, [please let me know](https://github.com/cararthompson/monochromeR/issues)!
