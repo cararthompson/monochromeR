@@ -2,24 +2,38 @@
 % Please edit documentation in R/view_palette.R
 \name{view_palette}
 \alias{view_palette}
-\title{Easy way to view the created palette}
+\title{View a created colour palette}
 \usage{
-view_palette(monochrome_palette, view_labels = TRUE)
+view_palette(x, view_labels = TRUE, monochrome_palette = deprecated())
 }
 \arguments{
-\item{monochrome_palette}{Vector of hex colour codes, or a \code{generate_palette()} call}
+\item{x}{A character vector of colours encoded in a way \code{\link[=ggplot]{ggplot()}} can work
+with, see \code{vignette("ggplot2-specs")}. Of course you can also call a palette
+generating function such as e.g. \code{\link[=palette_monochrome_blend]{palette_monochrome_blend()}} or
+\code{\link[=palette_monochrome_bw]{palette_monochrome_bw()}} inside \code{view_palette()}.}
 
-\item{view_labels}{Logical. If \code{view_palette} is set to TRUE, \code{view_labels} determines whether or
-not the hex colour codes are shown on the palette displayed in the plot window.}
+\item{view_labels}{A logical. If \code{TRUE}, the hex colour codes and, if \code{x} is
+named, the names are shown in the plot as well. If \code{FALSE}, the colours \code{x}
+are shown alone.}
+
+\item{monochrome_palette}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use the \code{x}
+argument instead.}
 }
 \value{
-A plot showing all the colours in the palette on the same row
+A ggplot showing all the colours in the palette in one row. Optionally,
+the hex color codes and, if available, the names can also be displayed.
 }
 \description{
-Easy way to view the created palette
+\code{view_palette()} provides an option to view a vector of colours. It requires
+\{ggplot2\} to work.
 }
 \examples{
+\dontshow{if (rlang::is_installed("ggplot2")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 view_palette(c("#464E69", "#8C90A1", "#D1D2D9"))
-view_palette(c("unripe" = "#89973d", "ripe" = "#e8b92f", "overripe" = "#a45e41"))
-view_palette(generate_palette("pink", "go_darker", n_colours = 3))
+banana_palette <- c("unripe" = "#89973d", "ripe" = "#e8b92f", "overripe" = "#a45e41")
+view_palette(banana_palette)
+view_palette(
+ palette_monochrome_bw("#CD3278FF", n_colours = 5), view_labels = FALSE
+ )
+\dontshow{\}) # examplesIf}
 }
