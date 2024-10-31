@@ -25,4 +25,4 @@ sticker(p, package="monochromeR", p_y = 1.11, p_size=18.5, s_x=1, s_y=1, s_width
         white_around_sticker = T,
         url = "github.com/cararthompson/monochromeR",
         u_color = pal[2], u_size = 3.6, u_family = "lato",
-        filename="inst/figures/logo.png")
+        filename = "man/figures/logo.png")

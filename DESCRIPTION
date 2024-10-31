@@ -1,23 +1,30 @@
 Package: monochromeR
 Title: Easily Create, View and Use Monochrome Colour Palettes
-Version: 0.2.0
+Version: 0.2.0.9000
 Authors@R: 
-    person(given = "Cara",
-           family = "Thompson",
-           role = c("aut", "cre"),
-           email = "packages@cararthompson.com",
-           comment = c(ORCID = "0000-0002-6472-5073"))
-Description: Generate a monochrome palette from a starting colour 
-    for a specified number of colours. The package can also be used to display 
-    colour palettes in the plot window, with or without hex codes and colour labels.
+    person(
+    "Cara",
+    "Thompson",
+    role = c("aut", "cre"),
+    email = "packages@cararthompson.com",
+    comment = c(ORCID = "0000-0002-6472-5073")
+    )
+Description: Let's you create and view monochrome colour palettes. Two options
+    are given to create palettes, go towards black and white from your start
+    colour or "blend" your start colour with another colour.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: false
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.1.2
+RoxygenNote: 7.3.2
 URL: https://github.com/cararthompson/monochromeR
 BugReports: https://github.com/cararthompson/monochromeR/issues
 Maintainer: Cara Thompson <packages@cararthompson.com>
 Imports: 
     ggplot2,
-    magrittr
+    lifecycle,
+    prismatic,
+    rlang
+Suggests: 
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
