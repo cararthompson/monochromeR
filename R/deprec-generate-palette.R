@@ -2,6 +2,11 @@
 
 #' Generate a monochrome palette
 #'
+#' #' @description
+#' `r lifecycle::badge("deprecated")`
+#' `generate_palette()` has been deprecated in favour of [palette_monochrome_bw()]
+#' and [palette_monochrome_blend()].
+#'
 #' This function allows users generate a monochrome colour palette
 #' containing any number of colours, starting from the colour they specify. The `modification`
 #' parameter can be set to make the palette go darker, lighter, or both
@@ -38,6 +43,15 @@
 generate_palette <- function(colour, modification, n_colours,
                              blend_colour = NULL,
                              view_palette = FALSE, view_labels = TRUE, ...) {
+
+  lifecycle::deprecate_warn(
+    "1.0.0",
+    "generate_palette()",
+    details = c(
+      i = "Use `palette_monochrome_blend()` or `palette_monochrome_bw()` instead"
+      ),
+    always = TRUE
+    )
 
   # Allows for US spelling input
   check_dots <- list(...)
