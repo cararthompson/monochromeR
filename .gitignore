@@ -1,3 +1,6 @@
 .Rproj.user
 .Rhistory
 .RData
+
+# Development quality assurance code and docs
+qa
