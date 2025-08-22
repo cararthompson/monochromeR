@@ -15,7 +15,9 @@ view_palette <- function(monochrome_palette,
   palette_tiles <- ggplot2::ggplot() +
     ggplot2::geom_tile(
       ggplot2::aes(
-        x = c(1:length(monochrome_palette)),
+        # x = c(1:length(monochrome_palette)),
+        # recommended change by {goodpractice} to avoid 1:0
+        x = seq_along(monochrome_palette),
         y = rep(1, length(monochrome_palette)),
         fill = monochrome_palette
       ),
@@ -34,7 +36,9 @@ view_palette <- function(monochrome_palette,
     palette_tiles <- palette_tiles +
       ggplot2::geom_text(
         ggplot2::aes(
-          x = c(1:length(monochrome_palette)),
+          # recommended change by {goodpractice} to avoid 1:0
+          # x = c(1:length(monochrome_palette)),
+          x = seq_along(monochrome_palette),
           y = rep(1.2, length(monochrome_palette)),
           label = label_vector
         ),
@@ -43,7 +47,9 @@ view_palette <- function(monochrome_palette,
       ) +
       ggplot2::geom_text(
         ggplot2::aes(
-          x = c(1:length(monochrome_palette)),
+          # recommended change by {goodpractice} to avoid 1:0
+          # x = c(1:length(monochrome_palette)),
+          x = seq_along(monochrome_palette),
           y = rep(0.8, length(monochrome_palette)),
           label = label_vector
         ),
