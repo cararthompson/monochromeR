@@ -1,3 +1,5 @@
+# This uses the  behavior-driven development (BDD) language
+# https://testthat.r-lib.org/reference/describe.html
 describe("view_palette()", {
   it("can create a plot showing all the colours in the palette on the same row", {
     # Note that expect_doppelganger() requires R version 4.1.0. If run on an
@@ -9,11 +11,11 @@ describe("view_palette()", {
     # file or the whole package, respectively.
 
     vdiffr::expect_doppelganger(
-      title = "grey palette with labels",
+      title = "view palette grey with labels",
       fig = view_palette(c("#464E69", "#8C90A1", "#D1D2D9"), view_labels = TRUE)
     )
     vdiffr::expect_doppelganger(
-      title = "ripe palette with labels",
+      title = "view palette ripe with labels",
       fig = view_palette(
         c(
           "unripe" = "#89973d",
@@ -24,7 +26,7 @@ describe("view_palette()", {
       )
     )
     vdiffr::expect_doppelganger(
-      title = "pink palette with labels",
+      title = "view palette pink with labels",
       fig = view_palette(
         generate_palette("pink",
           "go_darker",
@@ -34,13 +36,13 @@ describe("view_palette()", {
       )
     )
     vdiffr::expect_doppelganger(
-      title = "grey palette no labels",
+      title = "view palette grey no labels",
       fig = view_palette(c("#464E69", "#8C90A1", "#D1D2D9"),
         view_labels = FALSE
       )
     )
     vdiffr::expect_doppelganger(
-      title = "ripe palette no labels",
+      title = "view palette ripe no labels",
       fig = view_palette(
         c(
           "unripe" = "#89973d",
@@ -51,7 +53,7 @@ describe("view_palette()", {
       )
     )
     vdiffr::expect_doppelganger(
-      title = "pink palette no labels",
+      title = "view palette pink no labels",
       fig = view_palette(
         generate_palette("pink",
           "go_darker",
