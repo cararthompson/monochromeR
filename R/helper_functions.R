@@ -14,10 +14,14 @@
 #'
 check_colour_return_rgb <- function(colour, colour_variable_name) {
   if (is.character(colour)) {
-    if (any(grepl("invalid colour name", try(grDevices::col2rgb(colour), silent = T)))) {
-      stop(paste0("
-\nThe string you provided for ", colour_variable_name, " is neither a hex colour code (e.g. \"#ffffff\")
-nor a recognised colour name (e.g. \"white\")."))
+    if (any(grepl("invalid colour name", try(grDevices::col2rgb(colour),
+      silent = TRUE
+    )))) {
+      stop(paste0(
+        "
+\nThe string you provided for ", colour_variable_name,
+        " is neither a hex colour code (e.g. \"#ffffff\") nor a recognised colour name (e.g. \"white\")."
+      ))
     } else {
       col_rgb <- grDevices::col2rgb(colour)
     }
@@ -27,10 +31,12 @@ nor a recognised colour name (e.g. \"white\")."))
     all(colour < 256)) {
     col_rgb <- colour
   } else {
-    stop(paste0("
-\n", colour_variable_name, " must either be a recognised colour name (e.g. \"white\"),
+    stop(paste0(
+      "\n", colour_variable_name,
+      " must either be a recognised colour name (e.g. \"white\"),
 a hex colour code (e.g. \"#ffffff\") or vector of length 3 (red value,
-green value, blue value), with all values between 0 and 255."))
+green value, blue value), with all values between 0 and 255."
+    ))
   }
   return(col_rgb)
 }
