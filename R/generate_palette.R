@@ -1,5 +1,3 @@
-
-
 #' Generate a monochrome palette
 #'
 #' This function allows users generate a monochrome colour palette
@@ -26,60 +24,66 @@
 #' @return A vector of hex colour codes making up the generated palette
 #' @export
 #'
-#' @examples generate_palette("red", modification = "go_lighter",
-#' n_colours = 5, view_palette = TRUE, view_labels = TRUE)
+#' @examples generate_palette("red",
+#'   modification = "go_lighter",
+#'   n_colours = 5, view_palette = TRUE, view_labels = TRUE
+#' )
 #'
-#' generate_palette(c(15, 75, 99), modification = "go_both_ways",
-#' n_colours = 12, view_palette = TRUE, view_labels = FALSE)
+#' generate_palette(c(15, 75, 99),
+#'   modification = "go_both_ways",
+#'   n_colours = 12, view_palette = TRUE, view_labels = FALSE
+#' )
 #'
-#' generate_palette("red", blend_colour = "blue",
-#' n_colours = 6, view_palette = TRUE)
+#' generate_palette("red",
+#'   blend_colour = "blue",
+#'   n_colours = 6, view_palette = TRUE
+#' )
 #'
 generate_palette <- function(colour, modification, n_colours,
                              blend_colour = NULL,
                              view_palette = FALSE, view_labels = TRUE, ...) {
-
   # Allows for US spelling input
   check_dots <- list(...)
 
-  if(missing(colour) & "color" %in% names(check_dots)) {
+  if (missing(colour) & "color" %in% names(check_dots)) {
     colour <- check_dots$color
   }
 
-  if(missing(n_colours) & "n_colors" %in% names(check_dots)) {
+  if (missing(n_colours) & "n_colors" %in% names(check_dots)) {
     n_colours <- check_dots$n_colors
   }
 
-  if("blend_color" %in% names(check_dots)) {
-   blend_colour <- check_dots$blend_color
+  if ("blend_color" %in% names(check_dots)) {
+    blend_colour <- check_dots$blend_color
   }
 
   col_rgb <- check_colour_return_rgb(colour, "colour")
-  if(!is.null(blend_colour)){
+  if (!is.null(blend_colour)) {
     bg_col <- c(check_colour_return_rgb(blend_colour, "blend_colour"))
     message("
 Because you supplied a blend_colour, the modification variable is set to \"blend\".
 To use other modification options (\"go_darker\", \"go_lighter\" or \"go_both_ways\"),
 leave blend_colour as NULL.")
     modification <- "blend"
-  } else if(modification == "go_darker") {
+  } else if (modification == "go_darker") {
     bg_col <- "black"
-  } else if(modification == "go_lighter") {
+  } else if (modification == "go_lighter") {
     bg_col <- "white"
   }
 
-  if(!modification %in% c("go_darker", "go_lighter", "go_both_ways", "blend")) {
+  if (!modification %in% c("go_darker", "go_lighter", "go_both_ways", "blend")) {
     stop("modification must be one of the following: \"go_darker\", \"go_lighter\", \"go_both_ways\", or \"blend\"")
   }
 
   # if it's go both ways, need to do black and white separately for n_colours/2
   alpha_values <- seq(from = 1, to = 0.2, length.out = ifelse(modification == "go_both_ways",
-                                                              floor(n_colours/2) + 1,
-                                                              n_colours))
+    floor(n_colours / 2) + 1,
+    n_colours
+  ))
 
   generated_palette <- c()
 
-  if(modification == "go_both_ways"){
+  if (modification == "go_both_ways") {
     for (alpha_value in sort(alpha_values)) {
       generated_palette <- c(generated_palette, rgba_to_hex(c(col_rgb, alpha_value), "white"))
     }
@@ -87,17 +91,15 @@ leave blend_colour as NULL.")
       generated_palette <- c(generated_palette, rgba_to_hex(c(col_rgb, alpha_value), "black"))
     }
     generated_palette <- unique(generated_palette)[1:n_colours]
-
   } else {
     for (alpha_value in alpha_values) {
       generated_palette <- c(generated_palette, rgba_to_hex(c(col_rgb, alpha_value), bg_col))
     }
   }
 
-  if(view_palette == TRUE) {
+  if (view_palette == TRUE) {
     print(view_palette(generated_palette, view_labels = view_labels))
   }
 
   return(generated_palette)
-
 }
