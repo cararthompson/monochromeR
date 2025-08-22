@@ -22,5 +22,8 @@ Imports:
     ggplot2,
     magrittr
 Suggests: 
-    testthat (>= 3.0.0)
+    testthat (>= 3.0.0),
+    vdiffr (>= 1.0.8)
 Config/testthat/edition: 3
+Depends: 
+    R (>= 4.1.0)
