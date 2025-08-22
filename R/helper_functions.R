@@ -1,8 +1,9 @@
-#' Checks colour variables are either RGB values, hex colour codes or a recognised colour name
-#' and converts to rgb (helper funct)
+#' Checks colour variables are either RGB values, hex colour codes or a
+#' recognised colour name and converts to rgb (helper funct)
 #'
 #' @param colour The colour string / rgb vector to check
-#' @param colour_variable_name The name of the variable, for readability of error messages
+#' @param colour_variable_name The name of the variable, for readability of
+#'   error messages
 #'
 #' @return An error message if the colour value can't be interpreted
 #' @export
@@ -44,13 +45,15 @@ green value, blue value), with all values between 0 and 255."
 
 #' Converts RGBA to RGB (helper function)
 #'
-#' @param colour_rgba A vector of length 4: c(red value, green value, blue value, alpha).
-#' All colour values must be between 0 and 255. Alpha must be between 0 and 1.
-#' @param background_colour Defaults to white. Users can specify a different colour to get
-#' the hex code for their original colour blended with a specified background colour.
-#' `background_colour` must either be a recognised colour name (e.g. "white"),
-#' a hex colour code (e.g. "#ffffff") or vector of length 3 (red value, green value, blue value),
-#' with all values between 0 and 255. The default value is white ("#ffffff").
+#' @param colour_rgba A vector of length 4: c(red value, green value, blue
+#'   value, alpha). All colour values must be between 0 and 255. Alpha must be
+#'   between 0 and 1.
+#' @param background_colour Defaults to white. Users can specify a different
+#'   colour to get the hex code for their original colour blended with a
+#'   specified background colour. `background_colour` must either be a
+#'   recognised colour name (e.g. "white"), a hex colour code (e.g. "#ffffff")
+#'   or vector of length 3 (red value, green value, blue value), with all values
+#'   between 0 and 255. The default value is white ("#ffffff").
 #' @param ... Allows for US spelling of color/colour.
 #'
 #' @return A matrix of red, green and blue values

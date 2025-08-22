@@ -1,24 +1,30 @@
 #' Generate a monochrome palette
 #'
-#' This function allows users generate a monochrome colour palette
-#' containing any number of colours, starting from the colour they specify. The `modification`
-#' parameter can be set to make the palette go darker, lighter, or both
-#' ways from the starting colour. The function also allows users to create
-#' a palette that goes from one colour to another, by providing a `blend_colour`.
+#' This function allows users generate a monochrome colour palette containing
+#' any number of colours, starting from the colour they specify. The
+#' `modification` parameter can be set to make the palette go darker, lighter,
+#' or both ways from the starting colour. The function also allows users to
+#' create a palette that goes from one colour to another, by providing a
+#' `blend_colour`.
 #'
 #'
-#' @param colour The starting colour for the palette, which must be either be a recognised colour name (e.g. "white"),
-#' a hex colour code (e.g. "#ffffff") or vector of length 3 (red value, green value, blue value, e.g. c(15, 75, 99)),
-#' with all values between 0 and 255.
-#' @param modification One of the following: "go_darker", "go_lighter", "go_both_ways", or "blend".
-#' If a `blend_colour` is supplied, `modification` is automatically set to "blend".
+#' @param colour The starting colour for the palette, which must be either be a
+#'   recognised colour name (e.g. "white"), a hex colour code (e.g. "#ffffff")
+#'   or vector of length 3 (red value, green value, blue value, e.g. c(15, 75,
+#'   99)), with all values between 0 and 255.
+#' @param modification One of the following: "go_darker", "go_lighter",
+#'   "go_both_ways", or "blend". If a `blend_colour` is supplied, `modification`
+#'   is automatically set to "blend".
 #' @param n_colours Number of colours (levels) required in the palette
-#' @param blend_colour Optional. Can be either be a recognised colour name (e.g. "white"),
-#' a hex colour code (e.g. "#ffffff") or vector of length 3 (red value, green value, blue value, e.g. c(15, 75, 99)),
-#' with all values between 0 and 255.
-#' @param view_palette Logical. `view_palette = TRUE` displays the palette in the plot window.
-#' @param view_labels Logical. If view_palette is set to TRUE, view_labels = FALSE determines whether or
-#' not the hex colour codes are shown on the palette displayed in the plot window.
+#' @param blend_colour Optional. Can be either be a recognised colour name (e.g.
+#'   "white"), a hex colour code (e.g. "#ffffff") or vector of length 3 (red
+#'   value, green value, blue value, e.g. c(15, 75, 99)), with all values
+#'   between 0 and 255.
+#' @param view_palette Logical. `view_palette = TRUE` displays the palette in
+#'   the plot window.
+#' @param view_labels Logical. If view_palette is set to TRUE, view_labels =
+#'   FALSE determines whether or not the hex colour codes are shown on the
+#'   palette displayed in the plot window.
 #' @param ... Allows for US spelling of color/colour.
 #'
 #' @return A vector of hex colour codes making up the generated palette
@@ -76,24 +82,36 @@ leave blend_colour as NULL.")
   }
 
   # if it's go both ways, need to do black and white separately for n_colours/2
-  alpha_values <- seq(from = 1, to = 0.2, length.out = ifelse(modification == "go_both_ways",
-    floor(n_colours / 2) + 1,
-    n_colours
-  ))
+  alpha_values <- seq(
+    from = 1, to = 0.2,
+    length.out = ifelse(modification == "go_both_ways",
+      floor(n_colours / 2) + 1,
+      n_colours
+    )
+  )
 
   generated_palette <- c()
 
   if (modification == "go_both_ways") {
     for (alpha_value in sort(alpha_values)) {
-      generated_palette <- c(generated_palette, rgba_to_hex(c(col_rgb, alpha_value), "white"))
+      generated_palette <- c(
+        generated_palette,
+        rgba_to_hex(c(col_rgb, alpha_value), "white")
+      )
     }
     for (alpha_value in alpha_values) {
-      generated_palette <- c(generated_palette, rgba_to_hex(c(col_rgb, alpha_value), "black"))
+      generated_palette <- c(
+        generated_palette,
+        rgba_to_hex(c(col_rgb, alpha_value), "black")
+      )
     }
     generated_palette <- unique(generated_palette)[1:n_colours]
   } else {
     for (alpha_value in alpha_values) {
-      generated_palette <- c(generated_palette, rgba_to_hex(c(col_rgb, alpha_value), bg_col))
+      generated_palette <- c(
+        generated_palette,
+        rgba_to_hex(c(col_rgb, alpha_value), bg_col)
+      )
     }
   }
 
