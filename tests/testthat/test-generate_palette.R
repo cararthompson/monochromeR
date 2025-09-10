@@ -248,44 +248,76 @@ describe("generate_palette()", {
       ), result_vector_hex_specified_colour)
     })
   })
+
+  describe("modification parameter", {
+    # generate_palette <- function(colour, modification, n_colours,
+    # blend_colour = NULL,
+    #  view_palette = FALSE, view_labels = TRUE, ...) {
+    it("can handle named modification parameter", {
+      expect_equal(generate_palette(
+        colour = specified_colour_name,
+        modification = specified_colour_modification,
+        specified_colour_n_colours
+      ), result_vector_hex_specified_colour)
+    })
+
+    it("can show error if missing modification parameter", {
+      # TODO yes this shows error but no code handles the missing modification
+      # Error in generate_palette(colour = specified_colour_name) :
+      #  argument "modification" is missing, with no default
+      expect_error(generate_palette(colour = specified_colour_name))
+    })
+
+    it("can show error if empty modification parameter", {
+      # TODO Yes this shows error but does not handle empty modification
+      # correctly
+      #  Error in if (modification == "go_darker") {
+      expect_error(generate_palette(
+        colour = specified_colour_name,
+        modification = NULL
+      ))
+    })
+  })
+
   describe("examples", {
-    #' generate_palette("red",
-    #'                  #'   modification = "go_lighter",
-    #'                  #'   n_colours = 5, view_palette = TRUE, view_labels = TRUE
-    #'                  #' )
-    expect_equal(generate_palette(
-      "red",
-      modification = "go_lighter",
-      n_colours = 5,
-      view_palette = TRUE,
-      view_labels = TRUE
-    ), c("#FF0000", "#FF3232", "#FF6666", "#FF9999", "#FFCCCC"))
+    it("example go_lighter", {
+      # generate_palette("red",
+      #   modification = "go_lighter",
+      #   n_colours = 5, view_palette = TRUE, view_labels = TRUE)
+      expect_equal(generate_palette(
+        "red",
+        modification = "go_lighter",
+        n_colours = 5,
+        view_palette = TRUE,
+        view_labels = TRUE
+      ), c("#FF0000", "#FF3232", "#FF6666", "#FF9999", "#FFCCCC"))
+    })
+    it("example go_both_ways", {
+      # generate_palette(c(15, 75, 99),
+      #   modification = "go_both_ways",
+      #   n_colours = 12, view_palette = TRUE, view_labels = FALSE)
+      expect_equal(generate_palette(
+        c(15, 75, 99),
+        modification = "go_both_ways",
+        n_colours = 12,
+        view_palette = TRUE,
+        view_labels = FALSE
+      ), c(
+        "#CFDBDF", "#AFC3CB", "#8FABB6", "#6F93A1", "#4E7B8C", "#2E6377",
+        "#0F4B63", "#0D4155", "#0B3748", "#092D3B", "#07232E", "#051921"
+      ))
+    })
 
-    #' generate_palette(c(15, 75, 99),
-    #'   modification = "go_both_ways",
-    #'   n_colours = 12, view_palette = TRUE, view_labels = FALSE
-    #' )
-    expect_equal(generate_palette(
-      c(15, 75, 99),
-      modification = "go_both_ways",
-      n_colours = 12,
-      view_palette = TRUE,
-      view_labels = FALSE
-    ), c(
-      "#CFDBDF", "#AFC3CB", "#8FABB6", "#6F93A1", "#4E7B8C", "#2E6377",
-      "#0F4B63", "#0D4155", "#0B3748", "#092D3B", "#07232E", "#051921"
-    ))
-
-    #'
-    #' generate_palette("red",
-    #'   blend_colour = "blue",
-    #'   n_colours = 6, view_palette = TRUE
-    #' )
-    expect_equal(generate_palette(
-      "red",
-      blend_colour = "blue",
-      n_colours = 6,
-      view_palette = TRUE
-    ), c("#FF0000", "#D60028", "#AD0051", "#84007A", "#5B00A3", "#3300CC"))
+    it("example blend_colour", {
+      # generate_palette("red",
+      #   blend_colour = "blue",
+      #   n_colours = 6, view_palette = TRUE)
+      expect_equal(generate_palette(
+        "red",
+        blend_colour = "blue",
+        n_colours = 6,
+        view_palette = TRUE
+      ), c("#FF0000", "#D60028", "#AD0051", "#84007A", "#5B00A3", "#3300CC"))
+    })
   })
 })
